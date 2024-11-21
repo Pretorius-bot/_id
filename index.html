@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Lost & Found Documents</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <h1 class="logo">Lost & Found Docs</h1>
+      <div class="nav-links">
+        <button id="uploadBtn" class="btn primary">Upload Document</button>
+        <a id="searchBtn" class="btn" href="//2page.html" aria-current="page">Search Documents</a>
+      </div>
+    </nav>
+    
+    <main>
+      <div id="uploadForm" class="form-container">
+        <h2>Upload Found Document</h2>
+        <form id="documentForm">
+          <div class="form-group">
+            <label for="docType">Document Type</label>
+            <select id="docType" required>
+              <option value="">Select type...</option>
+              <option value="id">ID Card</option>
+              <option value="passport">Passport</option>
+              <option value="license">Driver's License</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="docNumber">Document Number</label>
+            <input type="text" id="docNumber" required placeholder="Enter ID/passport/license number">
+          </div>
+          
+          <div class="form-group">
+            <label for="name">Name (Document Owner)</label>
+            <input type="text" id="name" required placeholder="Enter your name as shown on the document">
+            <small class="help-text">Enter the name of the person who lost the document</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="dateFound">Date Found</label>
+            <input type="date" id="dateFound" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="location">Location Found</label>
+            <input type="text" id="location" required placeholder="Where did you find it?">
+          </div>
+          
+          <div class="form-group">
+            <label>Your Contact Info</label>
+            <div class="contact-group">
+              <input type="email" id="contact" required placeholder="Your email address">
+              <input type="tel" id="phone" required placeholder="Your phone number">
+            </div>
+            <small class="help-text">Contact information of the person who found the document</small>
+          </div>
+          
+          <button type="submit" class="btn primary">Submit</button>
+        </form>
+      </div>
+
+      <div id="searchForm" class="form-container hidden">
+        <h2>Search Lost Documents</h2>
+        <div class="search-filters">
+          <div class="form-group">
+            <label for="searchType">Document Type</label>
+            <select id="searchType">
+              <option value="">Any type</option>
+              <option value="id">ID Card</option>
+              <option value="passport">Passport</option>
+              <option value="license">Driver's License</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="searchDocNumber">Document Number</label>
+            <input type="text" id="searchDocNumber" placeholder="Enter ID/passport number...">
+          </div>
+          
+          <div class="form-group">
+            <label for="searchName">Your Name</label>
+            <input type="text" id="searchName" placeholder="Enter your name as shown on document...">
+          </div>
+          
+          <button id="searchSubmit" class="btn primary">Search</button>
+        </div>
+        
+        <div id="results" class="results-container">
+          <!-- Results will be populated by JavaScript -->
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const uploadForm = document.getElementById('uploadForm');
+      const searchForm = document.getElementById('searchForm');
+      const uploadBtn = document.getElementById('uploadBtn');
+      const searchBtn = document.getElementById('searchBtn');
+
+      uploadBtn.addEventListener('click', () => {
+        uploadForm.classList.remove('hidden');
+        searchForm.classList.add('hidden');
+      });
+
+      if (searchBtn) {
+        searchBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          searchForm.classList.remove('hidden');
+          uploadForm.classList.add('hidden');
+        });
+      }
+
+      document.getElementById('documentForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const docType = document.getElementById('docType').value;
+        const docNumber = document.getElementById('docNumber').value;
+        const name = document.getElementById('name').value;
+        const dateFound = document.getElementById('dateFound').value;
+        const location = document.getElementById('location').value;
+        const contact = document.getElementById('contact').value;
+        const phone = document.getElementById('phone').value;
+
+        console.log({
+          docType,
+          docNumber,
+          name,
+          dateFound,
+          location,
+          contact,
+          phone,
+        });
+
+        alert('Document submitted successfully!');
+        event.target.reset();
+      });
+    </script>
+  </body>
+</html>
